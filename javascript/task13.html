@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form with Validation and Local Storage</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>User Information Form</h2>
+
+    <form id="userForm">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="mobile">Mobile No:</label><br>
+        <input type="tel"id="mobile" name="mobile" required><br><br>
+
+        <label>Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="Male" required> Male
+        <input type="radio" id="female" name="gender" value="Female" required> Female<br><br>
+
+        <label for="hobby">Hobby:</label><br>
+        <input type="text" id="hobby" name="hobby" required><br><br>
+
+        <label for="city">City:</label><br>
+        <select id="city" name="city" required>
+            <option value="">Select City</option>
+            <option value="ahmedabad">Ahmedabad</option>
+            <option value="Surat">Surat</option>
+            <option value="Junagadh">Junagadh</option>
+            <option value="Patan">Patan</option>
+        </select><br><br>
+
+    <button type="submit"> submit:</button>
+
+     <h2>Submitted Data</h2>
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Mobile No</th>
+                <th>Gender</th>
+                <th>Hobby</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        
+        function validateForm(name, mobile, gender, hobby, city) {
+           
+            if (!name || !mobile || !gender || !hobby || !city) {
+                alert("All fields are required!");
+              return false;
+            }
+
+            
+            const mobilePattern = /^[0-9]{10}$/;
+            if (!mobilePattern.test(mobile)) {
+                alert("Please enter a valid 10-digit mobile number.");
+              return false;
+            }
+
+          return true;
+        }
+ 
+        
+         function saveDataToLocalStorage(userData) {
+             let data = JSON.parse(localStorage.getItem("userData")) || [];
+            data.push(userData);
+            localStorage.setItem("userData", JSON.stringify(data));
+        }
+
+        
+         function displayData() {
+             const data = JSON.parse(localStorage.getItem("userData")) || [];
+            const tableBody = document.querySelector("#dataTable tbody");
+             tableBody.innerHTML = ""; 
+
+             data.forEach(user => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${user.name}</td>
+                <td>${user.mobile}</td>
+                <td>${user.gender}</td>
+                    <td>${user.hobby}</td>
+               <td>${user.city}</td>
+            `;
+                tableBody.appendChild(row);
+           });
+     }
+
+        
+        wndow.onload = function() {
+       displayData();
+     };
+
+        
+     document.getElementById("userForm").addEventListener("submit", function(e) {
+           e.preventDefault(); 
+
+           
+           const name = document.getElementById("name").value;
+            const mobile = document.getElementById("mobile").value;
+           const gender = document.querySelector('input[name="gender"]:checked')?.value;
+             const hobby = document.getElementById("hobby").value;
+             const city = document.getElementById("city").value;
+
+           
+            if (validateForm(name, mobile, gender, hobby, city)) {
+                const userData = { name, mobile, gender, hobby, city };
+           
+               saveDataToLocalStorage(userData);
+
+        
+              document.getElementById("userForm").reset();
+
+  
+           displayData();
+            }
+        });
+  </script>
+
+</body>
+</html> 
