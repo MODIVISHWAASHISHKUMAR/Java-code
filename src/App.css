@@ -1,0 +1,41 @@
+{/*.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #195ee7;
+  padding: 20px;
+  color: white;
+}
+
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 10px;
+}
+
+.content {
+  display: flex;
+  margin-top: 20px;
+}
+
+.home .sidebar {
+  width: 200px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: left;
+}
+
+.home .main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.about {
+  padding: 20px;
+  text-align: left;
+}
+*/}
