@@ -1,5 +1,6 @@
 import React from 'react';
 import Counter from './Counter';  
+// import Calculator from './Calculator';
 
 // import ToggleVisibility from './ToggleVisibility'
 // import CountdownTimer from './CountdownTimer';
@@ -7,7 +8,8 @@ import Counter from './Counter';
 function App() {
   return (
     <div className="App">
-       <Counter/> 
+       <Counter/>  
+       {/* <Calculator/> */}
       {/* <ToggleVisibility/> */}
       {/* <CountdownTimer/> */}
     </div>

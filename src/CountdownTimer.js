@@ -38,7 +38,7 @@ class CountdownTimer extends React.Component {
       clearInterval(this.state.intervalId);
     }
   }
-  render() {
+  render( ) {
     const { time, isRunning } = this.state;
     return (
       <div>
